@@ -1,6 +1,12 @@
 @extends('layouts.admin')
 
 @section('content')
+<div class="d-flex justify-content-between mb-2">
+    <h2>All posts</h2>
+    <a class='btn btn-primary' href="{{route('admin.posts.create')}}"><i class="fas fa-plus"></i> Add a post</a>
+</div>
+
+
     <table class="table">
         <thead>
             <tr>
