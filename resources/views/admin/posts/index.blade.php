@@ -22,10 +22,14 @@
                 <td>{{$post->id}}</td>
                 <td><img width='100' src="{{$post->image}}" alt=""></td>
                 <td>{{$post->title}}</td>
-                <td>
+                <td class='d-flex'>
                     <a href="{{route('admin.posts.show', $post->id)}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                    <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-secondary"><i class="fas fa-pen"></i></a>
-                    <a href="" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                    <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-secondary mx-1"><i class="fas fa-pen"></i></a>
+                    <form action="{{route('admin.posts.destroy', $post->id)}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                    </form>
                 </td>
             </tr>
             @endforeach
