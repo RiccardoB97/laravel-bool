@@ -17,15 +17,14 @@
       <input type="text" name="title" id="title" class="form-control" placeholder="add a title" aria-describedby="titleHelper" value="{{old('title')}}">
       <small id="titleHelper" class="text-muted">Type a title for the current post</small>
     </div>
-    {{-- <div class="form-group">
-        <label for="image">Cover Image</label>
-        <input type="text" name="image" id="image" class="form-control" placeholder="https://" aria-describedby="imageHelper" value="{{old('image')}}">
-        <small id="imageHelper" class="text-muted">Type an image URL for the current post</small>
-    </div> --}}
     <div class="form-group">
         <label for="image">Cover Image</label>
         <input type="file" name="image" id="image">
+        <small id="coverImgHelper" class="form-text text-muted">Add a cover image</small>
     </div>
+    @error('cover')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
 
     <div class="form-group">
         <label for="content">Content</label>
