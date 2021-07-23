@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','PageController@index');
 Route::get('about','PageController@about')->name('guests.about');
-Route::get('contacts','PageController@contacts')->name('guests.contacts');
 
 // Pagine dei posts
 
