@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactFormMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -20,7 +22,14 @@ class PageController extends Controller
     }
     public function sendForm(Request $request)
     {   
-    ddd($request->all());
-
+     $validatedData = $request->validate([
+         'name' => 'required',
+         'email' => 'required',
+         'body' => 'required'
+     ]);
+        Mail::to('beraldo.riccardo@gmail.com')
+        ->cc($validatedData['email'])
+        ->send(new ContactFormMail($validatedData));
+    return redirect()->back()->with('message', 'Message sent successfully');
     }
 }

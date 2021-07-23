@@ -4,6 +4,20 @@
 <div class="container">
     <form action="{{route('contacts.send')}}" method="post">
         @csrf
+        @if(session('message'))
+            <div class="alert alert-success" role="alert">
+                <strong>{{session('message')}}</strong>
+            </div>
+        @endif
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" name="name" id="name" class="form-control" placeholder="Mario Rossi" aria-describedby="nameHelp">
