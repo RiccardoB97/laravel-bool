@@ -18,4 +18,9 @@ class PageController extends Controller
         return view('guests.contacts.index');
         
     }
+    public function sendForm(Request $request)
+    {   
+    ddd($request->all());
+
+    }
 }

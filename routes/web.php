@@ -24,6 +24,9 @@ Route::get('contacts','PageController@contacts')->name('guests.contacts');
 Route::get('posts', 'PostController@index')->name('posts.index');
 Route::get('posts/{post}', 'PostController@show')->name('posts.show');
 
+// Post routes
+
+Route::post('contacts', 'PageController@sendForm')->name('contacts.send');
 
 
 
