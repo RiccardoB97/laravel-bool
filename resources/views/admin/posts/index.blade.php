@@ -20,7 +20,7 @@
             @foreach($posts as $post)
             <tr>
                 <td>{{$post->id}}</td>
-                <td><img width='100' src="{{$post->image}}" alt=""></td>
+                <td><img  width='100' src="{{asset('storage/' . $post->image )}}" alt=""></td>
                 <td>{{$post->title}}</td>
                 <td class='d-flex'>
                     <a href="{{route('admin.posts.show', $post->id)}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
