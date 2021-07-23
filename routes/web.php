@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 // Pagine non connesse ad un modello
 
 Route::get('/','PageController@index');
-Route::get('about','PageController@about');
-Route::get('contacts','PageController@contacts');
+Route::get('about','PageController@about')->name('guests.about');
+Route::get('contacts','PageController@contacts')->name('guests.contacts');
 
 // Pagine dei posts
 

@@ -15,7 +15,7 @@ class PageController extends Controller
     }
 
     public function contacts(){
-        return view('guests.contacts');
+        return view('guests.contacts.index');
         
     }
 }
