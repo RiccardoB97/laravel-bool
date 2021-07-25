@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
 <h1>Contact me</h1>
-    <form action="" method="post">
+      <form action="" method="post">
         @csrf
         <div class="form-group">
           <label for="full_name">Full name</label>
@@ -16,9 +17,10 @@
         </div>
     <div class="form-group">
       <label for="">Message</label>
-      <textarea name="form-control" id="message"  name='message' rows="5"></textarea>
+      <textarea class="form-control" id="message"  name='message' rows="5"></textarea>
     </div>
     <button type="submit" class="btn btn-primary btn-block">Send </button>
         
     </form>
+    </div>
 @endsection

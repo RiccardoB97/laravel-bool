@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 class ContactController extends Controller
 {
     public function form(){
-        return view('guests.contact');
+        return view('guests.contacts');
     }
 
-    public function send(Request $request){
+    public function storeAndSend(Request $request){
         $validateData = $request->validate([
             'full_name' => 'required',
             'email' => 'required | email',
