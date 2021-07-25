@@ -3,6 +3,17 @@
 @section('content')
 <div class="container">
 <h1>Contact me</h1>
+@if(session('message'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <button type='button' class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>{{session('message')}}</strong>
+    </div>
+    <script>
+      $('alert').alert();
+    </script>
+@endif
       <form action="" method="post">
         @csrf
         <div class="form-group">
