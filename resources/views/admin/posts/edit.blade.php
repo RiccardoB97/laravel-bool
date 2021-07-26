@@ -18,11 +18,15 @@
       <input type="text" name="title" id="title" class="form-control" placeholder="add a title" aria-describedby="titleHelper" value="{{$post->title}}">
       <small id="titleHelper" class="text-muted">Type a title for the current post</small>
     </div>
-    {{-- <div class="form-group">
-        <label for="image">Cover Image</label>
-        <input type="text" name="image" id="image" class="form-control" placeholder="https://" aria-describedby="imageHelper" value="{{$post->image}}">
-        <small id="imageHelper" class="text-muted">Type an image URL for the current post</small>
-    </div> --}}
+    <div class="form-group">
+        <label for="category_id">Categories</label>
+        <select class="form-control" name="category_id" id="category_id">
+          <option value="">Select a category</option>
+          @foreach($categories as $category)
+              <option value="{{$category->id}}" {{$category->id === $post->category_id ? 'selected' : ""}}>{{$category->name}}</option>
+          @endforeach
+        </select>
+      </div>
     <div class="form-group">
         <label for="image">Cover Image</label>
         <input type="file" name="image" id="image">
