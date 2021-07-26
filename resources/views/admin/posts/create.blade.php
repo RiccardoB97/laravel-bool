@@ -18,6 +18,15 @@
       <small id="titleHelper" class="text-muted">Type a title for the current post</small>
     </div>
     <div class="form-group">
+      <label for="category_id">Categories</label>
+      <select class="form-control" name="category_id" id="category_id">
+        <option value="">Select a category</option>
+        @foreach($categories as $category)
+            <option value="{{$category->id}}">{{$category->name}}</option>
+        @endforeach
+      </select>
+    </div>
+    <div class="form-group">
         <label for="image">Cover Image</label>
         <input type="file" name="image" id="image">
         <small id="coverImgHelper" class="form-text text-muted">Add a cover image</small>
