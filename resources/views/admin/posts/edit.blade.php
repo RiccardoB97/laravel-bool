@@ -11,7 +11,7 @@
     </div>
 @endif
 
-<form action="{{route('admin.posts.update', $post->id)}}" method="post">
+<form action="{{route('admin.posts.update', $post->id)}}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="form-group">
@@ -22,10 +22,10 @@
 
     <div class="form-group">
         <label for="category_id">Categories</label>
-        <select class="form-control" name="category_id" id="category_id">
+        <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" id="category_id">
           <option value="">Select a category</option>
           @foreach($categories as $category)
-              <option value="{{$category->id}}" {{$category->id === $post->category_id ? 'selected' : ""}}>{{$category->name}}</option>
+              <option value="{{$category->id}}" {{$category->id == old('category_id', $post->category_id) ? 'selected' : ''}}>{{$category->name}}</option>
           @endforeach
         </select>
     </div>
@@ -36,6 +36,9 @@
           <option value="" disabled>Select a Tag</option>
           @if($tags)
               @foreach($tags as $tag)
+                @if($errors->any())
+                  <option value="{{$tag->id}}" {{in_array($tag->id, old('tags'))}}>{{$tag->name}}</option>
+                @endif
                   <option value="{{$tag->id}}" {{$post->tags->contains($tag) ? 'selected' : ''}}>{{$tag->name}}</option>
               @endforeach
           @endif
