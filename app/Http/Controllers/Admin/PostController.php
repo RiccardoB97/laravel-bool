@@ -95,18 +95,19 @@ class PostController extends Controller
     {
         $validateData = $request->validate([
             'title' => 'required | min:5 | max:255',
-            'image' => 'nullable | image |  max:5', 
+            'image' => 'nullable | image |  max:50', 
             'category_id' => 'nullable | exists:categories,id',
             'tags' => 'nullable | exists:tags,id',
             'content' => 'required'
         ]);
-        $post->update($validateData);
         $post->tags()->sync($request->tags);
 
         if(array_key_exists('image', $validateData)){
             $file_path = Storage::put('post_images', $validateData['image']);
             $validateData['image'] = $file_path;
         }
+        $post->update($validateData);
+
         
         return redirect()->route('admin.posts.index');
     }
