@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,7 +30,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -44,13 +46,17 @@ class PostController extends Controller
             'title' => 'required | min:5 | max:255',
             'image' => 'nullable |image | max:50', 
             'category_id' => 'nullable | exists:categories,id',
+            'tags' => 'nullable | exists:tags,id',
             'content' => 'required'
 
         ]);
-        $file_path = Storage::put('post_images', $validateData['image']);
-        $validateData['image'] = $file_path;
+        if($request->hasFile('image')){
+            $file_path = Storage::put('post_images', $validateData['image']);
+            $validateData['image'] = $file_path;
+        }
 
-        Post::create($validateData);
+        $post = Post::create($validateData);
+        $post->tags()->attach($request->tags);
         return redirect()->route('admin.posts.index');
     }
 
@@ -74,7 +80,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post', 'categories',  'tags'));
     }
 
     /**
@@ -90,6 +97,7 @@ class PostController extends Controller
             'title' => 'required | min:5 | max:255',
             'image' => 'nullable | max:255', 
             'category_id' => 'nullable | exists:categories,id',
+            'tags' => 'nullable | exists:tags,id',
             'content' => 'required'
         ]);
         $post->update($validateData);

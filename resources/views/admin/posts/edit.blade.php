@@ -10,6 +10,7 @@
         </ul>
     </div>
 @endif
+
 <form action="{{route('admin.posts.update', $post->id)}}" method="post">
     @csrf
     @method('PUT')
@@ -18,6 +19,7 @@
       <input type="text" name="title" id="title" class="form-control" placeholder="add a title" aria-describedby="titleHelper" value="{{$post->title}}">
       <small id="titleHelper" class="text-muted">Type a title for the current post</small>
     </div>
+
     <div class="form-group">
         <label for="category_id">Categories</label>
         <select class="form-control" name="category_id" id="category_id">
@@ -26,7 +28,20 @@
               <option value="{{$category->id}}" {{$category->id === $post->category_id ? 'selected' : ""}}>{{$category->name}}</option>
           @endforeach
         </select>
+    </div>
+
+    <div class="form-group">
+        <label for="tags">Tags</label>
+        <select multiple class="form-control" name="tags[]" id="tags">
+          <option value="" disabled>Select a Tag</option>
+          @if($tags)
+              @foreach($tags as $tag)
+                  <option value="{{$tag->id}}" {{$post->tags->contains($tag) ? 'selected' : ''}}>{{$tag->name}}</option>
+              @endforeach
+          @endif
+        </select>
       </div>
+      
     <div class="form-group">
         <label for="image">Cover Image</label>
         <input type="file" name="image" id="image">

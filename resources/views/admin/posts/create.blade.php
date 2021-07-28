@@ -17,6 +17,7 @@
       <input type="text" name="title" id="title" class="form-control" placeholder="add a title" aria-describedby="titleHelper" value="{{old('title')}}">
       <small id="titleHelper" class="text-muted">Type a title for the current post</small>
     </div>
+
     <div class="form-group">
       <label for="category_id">Categories</label>
       <select class="form-control" name="category_id" id="category_id">
@@ -26,11 +27,25 @@
         @endforeach
       </select>
     </div>
+
+    <div class="form-group">
+      <label for="tags">Tags</label>
+      <select multiple class="form-control" name="tags[]" id="tags">
+        <option value="" disabled>Select a Tag</option>
+        @if($tags)
+            @foreach($tags as $tag)
+                <option value="{{$tag->id}}">{{$tag->name}}</option>
+            @endforeach
+        @endif
+      </select>
+    </div>
+
     <div class="form-group">
         <label for="image">Cover Image</label>
         <input type="file" name="image" id="image">
         <small id="coverImgHelper" class="form-text text-muted">Add a cover image</small>
     </div>
+
     @error('cover')
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
