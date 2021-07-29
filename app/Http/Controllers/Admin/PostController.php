@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
 use App\Http\Controllers\Controller;
+use App\Category;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
@@ -68,7 +68,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('admin.posts.show', compact('post'));
+        $categories = Category::all();
+        return view('admin.posts.show', compact('post', 'categories'));
     }
 
     /**
@@ -101,14 +102,12 @@ class PostController extends Controller
             'content' => 'required'
         ]);
         $post->tags()->sync($request->tags);
-
         if(array_key_exists('image', $validateData)){
             $file_path = Storage::put('post_images', $validateData['image']);
             $validateData['image'] = $file_path;
         }
-        $post->update($validateData);
 
-        
+        $post->update($validateData);
         return redirect()->route('admin.posts.index');
     }
 
