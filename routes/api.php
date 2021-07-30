@@ -38,7 +38,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // });
 
 // Tutti i posts comprese relazioni
-Route::get('posts', function () {
-    $posts = Post::with(['tags'])->paginate();
-    return $posts;
-});
+// Route::get('posts', function () {
+//     $posts = Post::with(['tags'])->paginate();
+//     return $posts;
+// });
+
+
+// Route con controller
+Route::get('posts', 'API\PostController@index');

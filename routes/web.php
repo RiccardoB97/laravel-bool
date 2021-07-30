@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\PostResource;
+use App\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +41,10 @@ Auth::routes();
 Route::middleware('auth')->namespace('Admin')->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', 'HomeController@index')->name('dashboard');
     Route::resource('posts', PostController::class);
+});
+
+Route::get('posts/{post}', function (Post $post) {
+    return new PostResource(Post::find($post));
 });
 
 
