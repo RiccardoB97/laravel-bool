@@ -102,7 +102,9 @@ class PostController extends Controller
             'content' => 'required'
         ]);
         $post->tags()->sync($request->tags);
+
         if(array_key_exists('image', $validateData)){
+            Storage::delete($post->image);
             $file_path = Storage::put('post_images', $validateData['image']);
             $validateData['image'] = $file_path;
         }

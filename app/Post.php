@@ -9,7 +9,7 @@ use App\Tag;
 
 class Post extends Model
 {
-    protected $fillable = ['title', 'image', 'content', 'category_id', 'tag'];
+    protected $fillable = ['title', 'image', 'content'];
 
     public function category(){
         return $this->belongsTo(Category::class);
